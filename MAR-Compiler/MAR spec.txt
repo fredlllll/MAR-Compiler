@@ -1,0 +1,44 @@
+﻿<Program>
+<Program> -> <DataSegment> <Function>*
+<DataSegment> -> data{ <DataDeclaration>* }
+<DataDeclaration> -> <Identifier>;
+				  -> <Identifier>=<Constant>;
+<Function> -> int <Identifier>(<ParameterList>){<Statement>*}
+<ParameterList> -> (int <Identifier>)*
+<Statement> -> ;
+			-> <Identifier> ( <Expression> , ... );
+            -> { <Statement>* }
+			-> if (<Condition>) <Statement>
+			-> if (<Condition>) <Statement> else <Statement>
+			-> while (<Condition>) <Statement>
+			-> <Identifier> = <Expression>;
+<Condition> -> true
+            -> false
+			-> (<Condition>)
+			-> <Condition> <BinaryBooleanOperator> <Condition>
+			-> <UnaryBooleanOperator> <Condition>
+<BinaryBooleanOperator> -> == | != | <= | < | >= | > | && | ||
+<UnaryBooleanOperator> -> !
+<Expression> -> <Identifier>
+             -> <Constant>
+			 -> (<Expression>)
+			 -> <UnaryOperator> <Expression>
+			 -> <Expression> <BinaryOperator> <Expression>
+<UnaryOperator> -> -
+<BinaryOperator> -> - | + | * | / | %
+
+<Identifier> -> _a-zA-Z(_a-zA-Z0-9)*
+<Constant> -> (0-9)+ | 0x(0-9)+
+
+
+
+data{
+name,
+name=67,
+....
+}
+
+main(){
+	<statement>
+	
+}
