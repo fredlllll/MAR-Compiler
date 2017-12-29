@@ -8,5 +8,13 @@ namespace MAR_Compiler.Tokenizing
 {
     public class Token
     {
+        public string Text { get; }
+        public TokenType Type { get; }
+
+        public Token(string text, TokenType type)
+        {
+            Text = text;
+            Type = type;
+        }
     }
 }

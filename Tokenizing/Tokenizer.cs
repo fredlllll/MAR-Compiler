@@ -24,9 +24,41 @@ namespace MAR_Compiler.Tokenizing
 
             while(codeEnum.MoveNext())
             {
-                Char c = codeEnum.Current;
+                char c = codeEnum.Current;
+                CharType t = CharTypeHelper.GetCharType(c);
 
+                if(t.HasFlag(CharType.WhiteSpace))
+                {
+                    if(currentTokenText.Length > 0)
+                    {
+                        yield return TokenFromText(currentTokenText);
+                        currentTokenText = "";
+                    }
+                    continue;
+                }
+                switch(c)
+                {
+                    case ',':
+                    case '(':
+                    case ')':
+                    case '{':
+                    case '}':
+                    case ';':
+                    case '*':
+                    case '+':
+                    case '/':
+                        yield return TokenFromText(c.ToString());
+                        //single char tokens
+                        break;
+                    case ' ':
+                        break;
+                }
             }
+        }
+
+        private Token TokenFromText(string text)
+        {
+            return new Token(text, 0); //TODO: replace the 0 with something useful?
         }
 
         /*public IEnumerable<char> Code {get;private set;}

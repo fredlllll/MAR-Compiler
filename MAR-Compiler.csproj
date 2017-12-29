@@ -49,6 +49,7 @@
     <Compile Include="Tokenizing\PeekableIEnumerable.cs" />
     <Compile Include="Tokenizing\Token.cs" />
     <Compile Include="Tokenizing\Tokenizer.cs" />
+    <Compile Include="Tokenizing\TokenType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
