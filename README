@@ -57,6 +57,24 @@ the_val: dw 0
 
 this example program increases [the_val] by 3 and displays it, but displays 0xffff if [the_val] is divisible by 3
 
+the simplifier will output your compiled code to std out. usage:
+
+windows:
+
+MAR-Simplifier.exe mycode.asm > compiled.asm
+
+linux using mono (if you want stack traces when an exception is thrown, add --debug directly after mono):
+
+mono MAR-Simplifier.exe mycode.asm > compiled.asm
+
+above commands will compile the program in the mycode.asm file and write the output into the compiled.asm file
+
+to compile above example program, you can also just do
+
+MAR-Simplifier.exe -test
+
+as the example is hardcoded as of now
+
 this is of course still in development. arguments for functions do not yet create aliases and have to be accessed via the stack (see source for how its done)
 
 i also want to mention this was built very quickly and has therefore still some quirks
