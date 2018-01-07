@@ -1,0 +1,62 @@
+ok so this is an attempt for a readme
+
+the initial idea of this repo was to build a compiler for a simple language, which then compiles to the assembly used in the game.
+but with fundamental changes rolling in every day it made less and less sense for me to build a compiler.
+
+instead i built the MAR-Simplifier, which is able to translate some makros into MAR-Assembly. 
+
+makro lines have to start with a # (whitespaces before it are allowed) directly after the # comes the makro identifier and potential arguments
+some makros need a closing tag like #}
+
+needs closing tag:
+
+#while(mem/reg/imm){
+#if(mem/reg/imm){
+#}else{
+#func(name,args...){
+
+doesnt need closing tag:
+
+#return mem/reg/imm
+#callfunc(name,args...)=>mem/reg;
+
+while and if act similar to c, where every value other than 0 is true.
+
+example program:
+```
+; Define constants
+HWID_HOLO equ 0x9
+
+.data
+the_val: dw 0
+
+.text
+    #callFunc(loop);
+    brk
+	
+    #func(loop){
+        mov A, 3
+        #while(A){
+            add [the_val],1
+            sub A, 1
+        #}
+        mov Y, 0
+        mov A, [the_val]
+        div 9
+        #if(Y){
+            mov A, 1
+            mov B, [the_val]
+            hwi HWID_HOLO
+        #}else{
+            mov A, 1
+            mov B, 0xFFFF
+            hwi HWID_HOLO
+        #}
+    #}
+```
+
+this example program increases [the_val] by 3 and displays it, but displays 0xffff if [the_val] is divisible by 3
+
+this is of course still in development. arguments for functions do not yet create aliases and have to be accessed via the stack (see source for how its done)
+
+i also want to mention this was built very quickly and has therefore still some quirks

@@ -8,10 +8,13 @@ namespace MAR_Simplifier
     {
         static void Main(string[] args)
         {
-            Test();
-            return;
             if(args.Length > 0)
             {
+                if(args[0] == "-test")
+                {
+                    Test();
+                    return;
+                }
                 Tokenizer t = new Tokenizer();
                 var tokens = t.Tokenize(File.ReadAllText(args[0]));
                 Simplifier s = new Simplifier();
